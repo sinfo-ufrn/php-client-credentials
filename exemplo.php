@@ -1,11 +1,17 @@
 <?php
 
-$x-api-key = ""
+$url_base_autenticacao = "https://autenticacao.info.ufrn.br/";
+$client_id = "<my_client_id>";
+$client_secret = "<my_client_secret>";
+
+$url_base = "https://api.info.ufrn.br/";
+$x_api_key = "<my_x_api_key>";
+$versao = "<versao_api>";
 
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "https://apitestes.info.ufrn.br/authz-server/oauth/token?client_id=<client_id>&client_secret=<client_secret>&grant_type=client_credentials",
+  CURLOPT_URL => $url_base_autenticacao . "authz-server/oauth/token?client_id=" . $client_id . "&" . "client_secret=" . $client_secret . "&grant_type=client_credentials",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -38,7 +44,7 @@ $token_type = $jsonData['token_type'];
 $curlConsulta = curl_init();
 
 curl_setopt_array($curlConsulta, array(
-  CURLOPT_URL => "https://apitestes.info.ufrn.br/curso/<Versao>/modalidades-educacao",
+  CURLOPT_URL => $url_base . "curso/" . $versao . "/modalidades-educacao",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -47,7 +53,7 @@ curl_setopt_array($curlConsulta, array(
   CURLOPT_CUSTOMREQUEST => "GET",
    CURLOPT_HTTPHEADER => array(
     "Authorization: " . $token_type . " " . $token,
-    "x-api-key: " . $x-api-key
+    "x-api-key: " . $x_api_key
   ),
 ));
 
